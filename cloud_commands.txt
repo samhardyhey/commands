@@ -1,0 +1,39 @@
+# set project/config etc
+gcloud config set project {project_name}
+
+# configure new project/resources from scratch
+gcloud init
+
+# otso gcloud instances
+gcloud beta compute ssh --zone "australia-southeast1-c" "otso-client-dpc"  --project "otso-nlp-internal-development" -- -L 8889:127.0.0.1:8889
+gcloud compute ssh --project="otso-nlp-internal-development" --zone="australia-southeast1-c" "otso-client-dpc"
+
+# use user credentials as DAC
+gcloud auth application-default login
+
+# add ssh config for all gcloud instances (vscode remote connection etc.)
+gcloud compute config-ssh
+gcloud compute config-ssh --remove
+
+# export google application credentials
+export GOOGLE_APPLICATION_CREDENTIALS="/Users/samhardyhey/Desktop/nlp_util_cred/gcp_storage/otso_nlp_production.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/samhardyhey/otso_nlp_production.json"
+
+# google rsync
+gsutil -m rsync -r  gs://ccx-rand/sentiment_datasets/imdb_multi_class_sentiment ./imdb_multi_class_sentiment
+
+# sync s3 bucket
+aws s3 sync ./otso-data-sg s3://otsolearning/otso-data-sg --delete
+aws s3 sync s3://eliiza-thea-dataset-tmp ./eliiza-thea-dataset-tmp
+
+# list contents of a bucket
+aws s3 ls s3://mybucket
+
+# delete contents of an S3 bucket/delete bucket
+aws s3 rm --recursive s3://blog-os-asr
+aws s3 rb --force s3://blog-os-asr
+
+# azure container registry basics
+az login
+az acr login --name azureupskill
+docker push

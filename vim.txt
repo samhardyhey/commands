@@ -1,0 +1,10 @@
+# vim verbs
+- verbs: "d" (delete), "c" (change), "y" (yank), "v" (visually select)
+- nouns: "w" (word), "s" (sentence), "p" (paragraph)
+- line navigation: "0" (start of line), "$" (end of line), "10G" (go to line 10)
+- line edits: "yy" (yank current line)
+- word navigation: "fa" (find next "a" on line), "w" (forward one word, uppercase for big),"b" (backward one word, uppercase for big" words)
+- word edits: "cw" (replace from cursor to end of word),
+- page navigation: "H" (top screen), "M" (middle screen), "L" (bottom of screen), "gg" (top of file)
+- new line editing: "o" (new line after), "O" (newline before), "S" (delete line contents, in place)
+- paragraph formatting: ">" (tab selection once), visually select > shift+I (multi-line insert) > "#" (multi-line comments)

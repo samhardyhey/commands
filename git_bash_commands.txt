@@ -1,0 +1,82 @@
+# add python3.8 to path
+export PATH="/opt/homebrew/opt/python@3.8/bin:$PATH"' >> ~/.zshrc
+
+# rsync
+rsync -r /Volumes/PortableSSD/visual /Users/samhardyhey/Desktop/visual
+
+# link dracula themes
+ln -s $DRACULA_THEME/dracula.zsh-theme $OH_MY_ZSH/themes/dracula.zsh-theme
+ln -s /Users/samhardyhey/Desktop/zsh/dracula.zsh-theme /Users/samhardyhey/.oh-my-zsh/themes/dracula.zsh-theme
+
+# eliiza instances
+ssh -i "~/Desktop/scratch/auth/sh_dev.pem" ubuntu@ec2-54-206-206-241.ap-southeast-2.compute.amazonaws.com
+
+# scp
+scp -i ~/.ssh/google_compute_engine samhardyhey@35.187.228.252:~/back_trans_temp /Users/samhardyhey/Desktop/back_trans_temp
+scp -r -i ~/.ssh/google_compute_engine /Users/samhardyhey/Downloads samhardyhey@35.189.8.19:~
+
+# match against file names recursively
+grep -rnw '.' -e 'pattern'
+
+# clear all unix caches (install issues)
+free && sync && echo 3 > /proc/sys/vm/drop_caches && free
+
+# track remote as local
+git checkout --track origin/sh/fa_training
+
+# delete remote
+git push origin --delete huggingface-update
+
+# all remotes that have been merged into master
+git branch -r --merged master | grep "origin/"
+
+# delete all local brnaches merged into master
+git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d
+
+# grep regex or
+pip list | grep -E 's3fs|zip'
+
+# uninstall all packages in venv, without deleting venv
+pip freeze | xargs pip uninstall -y
+
+# search commit history
+git log --grep='tree\|rtree' # part of program?
+git log | grep 'tree\|rtree' # raw string?
+git log -G 'tree' # via git
+
+# rename branch
+git branch -m <old_branch> <new_branch>
+
+# find all files with extension
+find ./ -type f -name "*.pdf"
+
+# add keys, using apple keychain instead
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+
+# test connection
+ssh -T git@github.com
+
+# remove locks, package updates etc
+sudo rm /var/lib/apt/lists/lock && sudo rm /var/cache/apt/archives/lock && sudo rm /var/lib/dpkg/lock*
+
+# prevent conda from activating the base environment
+conda config --set auto_activate_base false
+
+# find process names with grep
+ps aux | grep -i '<program>'
+
+# kill process
+kill <signal_number> pid
+
+# add local ssh key forwarding
+ssh-add ~/.ssh/id_rsa
+
+# test git ssh identify
+ssh -T git@github.com
+
+# config git credentials
+git config --global user.email "samhardyhey@gmail.com"
+git config --global user.name "Sam Hardy"
+
+# in-line python run
+python -c "print('hello world'); print('hello world')"

@@ -1,0 +1,61 @@
+# show current docker auths
+cat ~/.docker/config.json
+
+# local dev
+docker run -v /Path/to/this/client-data-setup/folder:/data pii-replacement:latest /data/config/config.ini
+
+# local docker
+docker run -v /Users/samhardy/Desktop/scratch/thea_scratch/pii_removal/client-data-setup:/data australia-southeast1-docker.pkg.dev/thea-ap-play/de-pii/pii-replacement /data/config/local_docker.ini
+
+# colima
+colima start --cpu 4 --memory 8
+
+# supply .env file to docker run
+docker run --env-file ./.env db_docker
+
+# kill all running containers
+docker kill $(docker ps -q)
+
+# re-tag with registry qualified path
+docker tag nlp-entity-services:latest azureupskill.azurecr.io/nlp-entity-services
+docker push azureupskill.azurecr.io/nlp-entity-services
+docker pull azureupskill.azurecr.io/nlp-entity-services
+
+# manual docker login
+docker login --username AWS --password-stdin 020927663685.dkr.ecr.ap-southeast-2.amazonaws.com
+
+# run image with an env file, specify platform
+docker run --env-file ~/.api_creds -p 80:80 --platform=linux/x86_64 service-invoice-extraction uvicorn web_api:app --host 0.0.0.0 --port 80
+
+# get all deployments (list failing pods etc)
+kubectl get deployments
+
+# get all resources for a namespace
+kubectl get pods -n <name_space>
+
+# rollback deployment
+kubectl rollout undo deploy <deployment>> -n <name_space>
+
+# set default namespace
+kubectl config set-context --current --namespace=<name_space>
+
+# create a specific conda env
+conda create -n p39 python=3.9
+
+# test git credentials
+ssh -T git@github.com
+
+# docker build
+docker build -t <image_name> .
+
+# build with a specific file, specific tag
+docker build -t paddle_cpu -f paddle_cpu.Dockerfile .
+
+# kill container
+docker container kill
+
+# run with intel
+docker run -it --platform linux/amd64 python:3.9-slim-bullseye /bin/bash
+
+# add ssh keys to docker image
+--build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" --squash .
