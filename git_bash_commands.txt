@@ -80,3 +80,6 @@ git config --global user.name "Sam Hardy"
 
 # in-line python run
 python -c "print('hello world'); print('hello world')"
+
+# unzip tar
+tar -xf <archive>.tar.gz

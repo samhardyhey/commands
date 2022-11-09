@@ -6,3 +6,6 @@ SELECT * FROM pg_catalog.pg_tables;
 # stop local instance of postgres
 lsof -n -i:5432 | grep LISTEN
 brew services stop postgresql
+
+# describe schema/relation of table
+\d <table>

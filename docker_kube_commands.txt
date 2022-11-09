@@ -7,7 +7,10 @@ docker run -v /Path/to/this/client-data-setup/folder:/data pii-replacement:lates
 # local docker
 docker run -v /Users/samhardy/Desktop/scratch/thea_scratch/pii_removal/client-data-setup:/data australia-southeast1-docker.pkg.dev/thea-ap-play/de-pii/pii-replacement /data/config/local_docker.ini
 
-# colima
+# check context (DD, colima?)
+docker context
+
+# start colima
 colima start --cpu 4 --memory 8
 
 # supply .env file to docker run
